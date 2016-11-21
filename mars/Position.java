@@ -28,7 +28,7 @@ public class Position implements State {
 		// TODO Auto-generated method stub
 		Set<Action> actions = new LinkedHashSet<Action>();
 		
-		return null;
+		return actions;
 	}
 
 	@Override

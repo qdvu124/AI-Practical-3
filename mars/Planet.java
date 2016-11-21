@@ -22,5 +22,6 @@ public class Planet {
     public int width() {return accessible[0].length;}
     
     public static void main (String args[]) {
+    	
     }
 }
