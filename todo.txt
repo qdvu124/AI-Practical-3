@@ -1,0 +1,2 @@
+Finish implementation of the state
+Heuristics for search using the set of visited nodes

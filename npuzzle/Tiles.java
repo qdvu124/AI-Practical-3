@@ -55,7 +55,7 @@ public class Tiles implements State {
 		for (Movement movement : Movement.values()) {
 			int newEmptyTileRow = emptyTileRow + movement.deltaRow;
 			int newEmptyTileColumn = emptyTileColumn + movement.deltaColumn;
-			if (0 <= newEmptyTileRow && newEmptyTileRow < width && 0 <= newEmptyTileColumn & newEmptyTileColumn < width)
+			if (0 <= newEmptyTileRow && newEmptyTileRow < width && 0 <= newEmptyTileColumn && newEmptyTileColumn < width)
 				actions.add(movement);
 		}
 		return actions;
@@ -68,5 +68,28 @@ public class Tiles implements State {
 		newTiles[emptyTileRow * width + emptyTileColumn] = getTile(newEmptyTileRow, newEmptyTileColumn);
 		newTiles[newEmptyTileRow * width + newEmptyTileColumn] = EMPTY_TILE;
 		return new Tiles(width, newTiles, newEmptyTileRow, newEmptyTileColumn);
+	}
+	@Override
+	public boolean equals(Object anotherObject) {
+		// TODO Auto-generated method stub
+		//Different sizes, therefore cannot be equal
+		Tiles anotherState = (Tiles) anotherObject;
+		if(anotherState.getWidth() != getWidth())
+			return false;
+		//Else check elements at the same position to see if they are equal
+		for(int i = 0; i < width; i++) {
+			for(int j = 0; j < width; j++)
+				if(anotherState.getTile(i, j) != getTile(i,j))
+					return false;
+		}
+		return true;
+	}
+	@Override
+	public int hashCode() {
+		final int prime = 7; 
+		int hash = 1;
+		for(int i = 0; i < tiles.length; i++)
+			hash *= (i + tiles[i] % prime + 1);
+		return hash;
 	}
 }

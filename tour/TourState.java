@@ -28,4 +28,19 @@ public class TourState implements State {
 		newVisitedCities.add(road.targetCity);
 		return new TourState(newVisitedCities, road.targetCity);
 	}
+	public int hashCode() {
+		StringBuilder sb = new StringBuilder();
+		for(City city: visitedCities) {
+			sb.append(city.name);
+		}
+		return sb.toString().hashCode();
+	}
+	public boolean equals(Object anotherObject) {
+		TourState another = (TourState) anotherObject;
+		for(City city: visitedCities) {
+			if(!another.visitedCities.contains(city))
+				return false;
+		}
+		return true;
+	}
 }
