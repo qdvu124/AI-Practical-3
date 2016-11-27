@@ -1,5 +1,6 @@
 package mars;
 
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -8,7 +9,7 @@ import search.State;
 
 public class Position implements State {
 	
-	private Set<Cell> visitedCells;
+	private HashSet<Cell> visitedCells;
 	protected final int[][] map;
 	protected final int currentRow;
 	protected final int currentColumn;
@@ -16,7 +17,8 @@ public class Position implements State {
 	protected final int length;
 	protected final int moves;
 	
-	public Position (int[][] map, Cell currentCell, int moves) {
+	public Position (int[][] map, Cell currentCell, HashSet<Cell> visitedCells, int moves) {
+		this.visitedCells = (HashSet<Cell>) visitedCells;
 		this.map = map;
 		this.moves = moves;
 		currentRow = currentCell.getRow();
@@ -47,7 +49,15 @@ public class Position implements State {
 		Movement movement = (Movement) action;
 		int newRow = currentRow + movement.deltaRow;
 		int newColumn = currentColumn + movement.deltaColumn;
-		return new Position(this.map, new Cell(newRow, newColumn), moves - 1);
+		Cell next = new Cell(newRow, newColumn);
+		HashSet<Cell> newVisitedCells = new HashSet<Cell>();
+		newVisitedCells.addAll(visitedCells);
+		newVisitedCells.add(next);
+		return new Position(this.map, next, newVisitedCells, moves - 1);
+	}
+	
+	public int countVisitedCells() {
+		return visitedCells.size();
 	}
 	
 	public int hashCode() {
