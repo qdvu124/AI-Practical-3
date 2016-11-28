@@ -1,3 +1,0 @@
-- Finish implementation of the state
-- Heuristics for search using the set of visited nodes
-- Finish enumeration of available action at any states

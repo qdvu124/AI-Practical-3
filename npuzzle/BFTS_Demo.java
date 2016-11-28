@@ -34,7 +34,7 @@ public class BFTS_Demo {
 		Node BfsTreeSolution = BfsTreeSearch.findSolution(root, goalTest);
 		System.out.println("BfsTreeSearch generated " + BfsTreeSearch.nodeGenerated() + " nodes");
 		System.out.println("Maximum frontier size: " + BfsTreeSearch.frontierMaxSize());
-		//new NPuzzlePrinting().printSolution(BfsTreeSolution);
+		new NPuzzlePrinting().printSolution(BfsTreeSolution);
 		
 		TreeSearch DfsTreeSearch = new TreeSearch(new DepthFirstFrontier());
 		//Node DfsTreeSolution = DfsTreeSearch.findSolution(root, goalTest);

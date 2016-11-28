@@ -14,7 +14,7 @@ public class Position implements State {
 	protected final int currentRow;
 	protected final int currentColumn;
 	protected final int width;
-	protected final int length;
+	protected final int height;
 	protected final int moves;
 	
 	public Position (int[][] map, Cell currentCell, HashSet<Cell> visitedCells, int moves) {
@@ -23,20 +23,20 @@ public class Position implements State {
 		this.moves = moves;
 		currentRow = currentCell.getRow();
 		currentColumn = currentCell.getColumn();
-		width = map.length;
-		length = map[0].length;
+		height = map.length;
+		width = map[0].length;
 	}
 
 	@Override
 	public Set<? extends Action> getApplicableActions() {
 		// TODO Auto-generated method stub
-		if(moves == 0)
-			return null;
 		Set<Action> actions = new LinkedHashSet<Action>();
+		if(moves == 0)
+			return actions;
 		for (Movement movement : Movement.values()) {
 			int newRow = currentRow + movement.deltaRow;
 			int newColumn = currentColumn + movement.deltaColumn;
-			if (0 <= newRow && newRow < width && 0 <= newColumn && newColumn < length)
+			if (0 <= newRow && newRow < height && 0 <= newColumn && newColumn < width)
 				if(map[newRow][newColumn] == 0)
 					actions.add(movement);
 		}
@@ -52,7 +52,8 @@ public class Position implements State {
 		Cell next = new Cell(newRow, newColumn);
 		HashSet<Cell> newVisitedCells = new HashSet<Cell>();
 		newVisitedCells.addAll(visitedCells);
-		newVisitedCells.add(next);
+		if(!newVisitedCells.contains(next))
+			newVisitedCells.add(next);
 		return new Position(this.map, next, newVisitedCells, moves - 1);
 	}
 	
@@ -66,11 +67,11 @@ public class Position implements State {
 	
 	public boolean equals(Object object) {
 		Position other = (Position) object;
+		if(other.moves != this.moves)
+			return false;
 		for(Cell cell: visitedCells)
 			if(!other.visitedCells.contains(cell))
 				return false;
-		if(other.moves != this.moves)
-			return false;
 		return true;
 	}
 

@@ -16,4 +16,13 @@ public class Cell {
 	public int getColumn() {
 		return column;
 	}
+	
+	public int hashCode() {
+		return row * 2 + column * 3;
+	}
+	
+	public boolean equals(Object another) {
+		Cell anotherCell = (Cell) another;
+		return row == anotherCell.getRow() && column == anotherCell.getColumn();
+	}
 }
