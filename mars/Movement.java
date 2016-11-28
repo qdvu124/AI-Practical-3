@@ -18,5 +18,4 @@ public enum Movement implements Action {
 		// TODO Auto-generated method stub
 		return 1;
 	}
-
 }

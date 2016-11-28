@@ -18,13 +18,13 @@ public class Planet {
         {1,1,1,0,0,0,0,1},
         {1,1,1,1,0,1,1,1},
 */     
-    	{1,1,1,1,1,1,1,1},
-        {1,1,1,1,1,1,1,1},
-        {1,0,1,0,1,0,1,1},
-        {0,1,0,0,0,1,0,1},
-        {1,1,1,0,1,0,0,1},
-        {1,1,1,1,1,0,0,1},
+		{1,1,1,1,0,1,1,1},
         {1,1,0,0,0,0,0,1},
+        {1,0,1,0,1,0,1,1},
+        {0,0,1,1,1,0,0,0},
+        {1,0,0,1,0,1,0,1},
+        {1,1,0,0,0,1,0,1},
+        {1,1,1,0,0,0,0,1},
         {1,1,1,1,0,1,1,1},
 };
         
@@ -43,8 +43,10 @@ public class Planet {
     	System.out.println();
     	
     	GoalTest goalTest = new MarsGoalTest();
-    	Cell startingCell = new Cell(3,3);
-    	Position initialPosition = new Position(accessible, startingCell, new HashSet<Cell>(), GOAL);
+    	Cell startingCell = new Cell(4,4);
+    	HashSet<Cell> set = new HashSet<Cell>();
+    	set.add(startingCell);
+    	Position initialPosition = new Position(accessible, startingCell, set, GOAL);
     	
     	Node root = new Node (null, null, initialPosition);
     	AStarFunction aStarFunction = new AStarFunction(new MarsHeuristicFunction());

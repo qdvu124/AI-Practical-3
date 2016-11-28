@@ -17,7 +17,7 @@ public class MarsPrinting extends Printing {
 		int[][] map = position.map;
 		int currentRow = position.currentRow;
 		int currentColumn = position.currentColumn;
-		map[currentRow][currentColumn] = 5;
+		map[currentRow][currentColumn] = 2;
 		for(int i = 0; i < map.length; i++) {
 			for(int j = 0; j < map[0].length; j++) {
 				System.out.print(map[i][j] + " ");
