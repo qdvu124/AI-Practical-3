@@ -9,7 +9,7 @@ import search.Node;
 
 public class Planet {
     private static final int[][] accessible = new int[][] {
-        {1,1,1,1,0,1,1,1},
+        /*{1,1,1,1,0,1,1,1},
         {1,1,0,0,0,0,0,1},
         {1,0,1,0,1,0,1,1},
         {0,0,1,1,1,0,0,0},
@@ -17,7 +17,16 @@ public class Planet {
         {1,1,0,0,0,1,0,1},
         {1,1,1,0,0,0,0,1},
         {1,1,1,1,0,1,1,1},
-     };
+*/     
+    	{1,1,1,1,1,1,1,1},
+        {1,1,1,1,1,1,1,1},
+        {1,0,1,0,1,0,1,1},
+        {0,1,0,0,0,1,0,1},
+        {1,1,1,0,1,0,0,1},
+        {1,1,1,1,1,0,0,1},
+        {1,1,0,0,0,0,0,1},
+        {1,1,1,1,0,1,1,1},
+};
         
     public static boolean isAccessible(int x, int y) {
         int offx = x+0; int offy = y+0;
@@ -43,9 +52,12 @@ public class Planet {
     	MarsGraphSearch marsSolver = new MarsGraphSearch(new BestFirstFrontier(aStarFunction));
     	Node aStarMarsSolution = marsSolver.findSolution(root , goalTest);
     	if(aStarMarsSolution == null) {
+    		aStarMarsSolution = marsSolver.retrieveBest();
+    		Position position = (Position) aStarMarsSolution.state;
+    		int moves = GOAL - position.moves;
     		System.out.println("There are no solutions to cover all " + GOAL + " squares");
-    		System.out.println("The best solution covers " + marsSolver.maxLength + " squares");
-    		new MarsPrinting().printSolution(marsSolver.retrieveBest());
+    		System.out.println("The best solution covers " + marsSolver.maxLength + " squares in " + moves + " moves");
+    		new MarsPrinting().printSolution(aStarMarsSolution);
     	}
     	else {
 			System.out.println("Optimal path covering " + GOAL + " squares found!");
